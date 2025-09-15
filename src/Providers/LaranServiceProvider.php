@@ -18,5 +18,8 @@ class LaranServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        $this->publishes([
+            __DIR__ . '/../../dist' => public_path('vendor/laran'),
+        ], 'laran-assets');
     }
 }
