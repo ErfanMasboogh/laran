@@ -1,0 +1,24 @@
+{
+    "name": "ErfanMasboogh/laran",
+    "keywords": [
+        "laran"
+    ],
+    "description": "Laran, a package for laravel",
+    "type": "laravel-package",
+    "authors": [
+        {
+            "name": "Erfan Masboogh",
+            "email": "erfaanmasbogh@gmail.com"
+        }
+    ],
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "ErfanMasboogh\\Laran\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^8.2",
+        "illuminate/support": "^11.0"
+    }
+}
