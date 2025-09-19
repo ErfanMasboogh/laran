@@ -12,6 +12,7 @@ class Manager extends Authenticatable
 
     public $primaryKey = 'ID';
     public $timestamps = false;
+    protected $guard = 'manager';
 
     protected $fillable = [
         'name',
