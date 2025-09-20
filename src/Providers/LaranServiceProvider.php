@@ -24,6 +24,8 @@ class LaranServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__ . '/../../routes/web.php');
         $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'laran');
+        $this->mergeConfigFrom(__DIR__.'/../../config/laran.php', 'laran');
+
 
         $this->publishes([
             __DIR__ . '/../../dist' => public_path('vendor/laran'),
@@ -31,5 +33,10 @@ class LaranServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../../database/seeders' => database_path('seeders'),
         ]);
+
+
+        $laranAuth = config('laran.auth');
+        config(['auth.guards.manager' => $laranAuth['guards']['manager']]);
+        config(['auth.providers.managers' => $laranAuth['providers']['managers']]);
     }
 }
