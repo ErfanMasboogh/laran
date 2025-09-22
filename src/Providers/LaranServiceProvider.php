@@ -3,6 +3,8 @@
 namespace ErfanMasboogh\Laran\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Validator;
+use ErfanMasboogh\Laran\Rule\ValidMobile;
 
 class LaranServiceProvider extends ServiceProvider
 {
@@ -11,6 +13,7 @@ class LaranServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->app->register(\ErfanMasboogh\Laran\Providers\LaranValidationServiceProvider::class);
     }
 
     /**
@@ -24,7 +27,7 @@ class LaranServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__ . '/../../routes/web.php');
         $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'laran');
-        $this->mergeConfigFrom(__DIR__.'/../../config/laran.php', 'laran');
+        $this->mergeConfigFrom(__DIR__ . '/../../config/laran.php', 'laran');
 
 
         $this->publishes([

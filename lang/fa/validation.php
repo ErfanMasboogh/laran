@@ -105,8 +105,9 @@ return [
     'uploaded' => ':attribute آپلود نشد.',
     'url' => 'قالب :attribute معتبر نیست.',
     'uuid' => ':attribute باید یک UUID معتبر باشد.',
-
+    'mobile' => 'فیلد :attribute باید یک شماره موبایل معتبر باشد.',
     'attributes' => [
-        'Name' => 'نام'
+        'Name' => 'نام',
+        'mobile' => 'شماره موبایل',
     ]
 ];
