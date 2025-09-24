@@ -109,5 +109,6 @@ return [
     'attributes' => [
         'Name' => 'نام',
         'mobile' => 'شماره موبایل',
+        'password' => 'رمز عبور'
     ]
 ];
