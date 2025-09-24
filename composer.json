@@ -14,11 +14,16 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "ErfanMasboogh\\Laran\\": "src/"
+            "ErfanMasboogh\\Laran\\": "src/",
+            "files": [
+                "src/Helpers/Functions.php"
+            ]
         }
     },
     "require": {
-        "php": "^8.2"
+        "php": "^8.2",
+        "laravel/sanctum": "*",
+        "spatie/laravel-html": "*"
     },
     "extra": {
         "laravel": {
