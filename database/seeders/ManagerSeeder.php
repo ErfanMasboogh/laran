@@ -16,7 +16,7 @@ class ManagerSeeder extends Seeder
         $managerInfo = [
             'name' => 'Laran',
             'family' => 'Admin',
-            'mobile' => '09930000000',
+            'mobile' => '9930000000',
             'password' => Hash::make('1234'),
         ];
 
