@@ -1,5 +1,5 @@
 {
-    "name": "ErfanMasboogh/laran",
+    "name": "erfanmasboogh/laran",
     "keywords": [
         "laran"
     ],
@@ -23,7 +23,8 @@
     "require": {
         "php": "^8.2",
         "laravel/sanctum": "*",
-        "spatie/laravel-html": "*"
+        "spatie/laravel-html": "*",
+        "morilog/jalali": "^3.4"
     },
     "extra": {
         "laravel": {
