@@ -41,7 +41,7 @@ if (!function_exists('normalizeMobile')) {
             $number = substr($number, 2);
         }
         $number = ltrim($number, '0');
-        
+
         return $number;
     }
 }

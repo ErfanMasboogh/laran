@@ -47,4 +47,9 @@ class Manager extends Authenticatable
             'status' => 'string',
         ];
     }
+
+    public function getFullNameAttribute(): string
+    {
+        return $this->name . ' ' . $this->family;
+    }
 }
