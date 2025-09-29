@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'menu' => [
+        'Dashboard' => 'Dashboard',
+    ],
     'Login' => 'Login',
     'Login to admin panel' => 'Login to admin panel',
     'Please enter your login credentials' => 'Please enter your login credentials.',
@@ -11,4 +14,5 @@ return [
     'Admin panel' => 'Admin panel',
     'Administrator' => 'Administrator',
     'Logout' => 'Logout',
+    'Today' => 'Today',
 ];

@@ -8,32 +8,39 @@
 
     <link href="{{ asset('vendor/laran/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/laran/fonts/vazir/font-face.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/laran/css/custom.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    {{-- Custom styles for sidebar width and icon animation --}}
     <style>
         .sidebar {
-            width: 250px; /* Specific width for the sidebar */
+            width: 250px;
+            position: sticky;
+            top: 0;
+            height: 100vh;
         }
 
-        /* CSS for rotating the icon */
         .rotated-icon {
-            transform: rotate(-90deg);
-            transition: transform 0.3s ease;
+            transform: rotate(90deg);
+            transition: transform 0.15s ease;
+        }
+
+        #user-dropdown-toggle::after {
+            transition: transform 0.15s ease-in-out !important;
+        }
+
+        #user-dropdown-toggle.dropdown-rotate-left::after {
+            transform: rotate(90deg) !important;
         }
     </style>
 </head>
 
 <body style="font-family: Vazir;">
 
-{{-- The main page container. d-flex enables flexbox. flex-row-reverse makes the content flow from right-to-left,
-     but we will then order the elements to visually place the sidebar on the left. --}}
 <div class="page-content d-flex h-100 flex-row-reverse">
 
-    {{-- Main content wrapper. For RTL with flex-row-reverse, this should come first in the HTML to appear on the left. --}}
     <div class="content-wrapper flex-grow-1 overflow-auto">
 
-        <nav class="navbar navbar-expand-lg shadow bg-white">
+        <nav class="navbar navbar-expand-lg bg-white sticky-top shadow-sm">
             <div class="container-fluid">
                 <button class="btn d-lg-none" data-bs-toggle="collapse" data-bs-target="#sidebar">
                     <i class="fa-solid fa-list"></i>
@@ -42,20 +49,20 @@
                 <div class="collapse navbar-collapse">
                     <div class="me-auto">
                         <i class="fa-solid fa-calendar"></i>
-                        {{-- {{ lt('today') .' '. verta()->format('l d F %Y') }} --}}
+                         {{ lt('Today') . ' ' . Morilog\Jalali\Jalalian::forge(now())->format('l d F %Y') }}
                     </div>
                 </div>
 
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
-                            <img src="{{ asset('vendor/laran/images/userIcon.png') }}" class="rounded-circle me-2" width="32" height="32">
-                            <span>{{ auth()->guard('manager')->user()?->fullName }}</span>
+                        <a id="user-dropdown-toggle" class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="{{ asset('vendor/laran/images/userIcon.png') }}" class="rounded-circle me-2 mx-1" width="32" height="32">
+                            <span class="m-1" >{{ auth()->guard('manager')->user()?->fullName }}</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li>
                                 <a href="{{ route('admin.logout') }}" class="dropdown-item">
-                                    <i class="fa-solid fa-right-from-bracket me-2"></i> {{ lt('Logout') }}
+                                    <i class="fa fa-right-from-bracket mx-1"></i> {{ lt('Logout') }}
                                 </a>
                             </li>
                         </ul>
@@ -63,52 +70,71 @@
                 </ul>
             </div>
         </nav>
-        <main class="p-4">
-            <header class="mb-4">
-                <h4>@yield('pageTitle')</h4>
-                @yield('pageHeader')
-            </header>
+        <main class="p-4 m-3">
+            <div class="content-inner">
+                <!-- Page header -->
+                <div class="page-header">
+                    <div class="page-header-content d-lg-flex">
+                        <div class="d-flex">
+                            @yield('pageHeader')
+                        </div>
+                    </div>
+                </div>
+                <!-- /page header -->
 
-            @yield('content')
+                <!-- Content area -->
+                <div class="content">
+                    <div class="content-header">
+                        <div class="container-fluid">
+                            <div class="row mb-2">
+                                <div class="col-sm-12">
+                                    <h4 class="m-0">
+                                        @yield('pageTitle')
+                                    </h4>
+                                </div><!-- /.col -->
+                            </div><!-- /.row -->
+                        </div><!-- /.container-fluid -->
+                        @if ($errors->any())
+                            <div class="alert alert-danger alert-dismissible">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>
+                                            {{$error}}
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
+                        @if (session('success'))
+                            <div class="alert alert-success alert-dismissible">
+                                {{session('success')}}
+                            </div>
+                        @endif
+                    </div>
+                    @yield('content')
+                </div>
+                </div>
         </main>
-        <footer class="navbar navbar-sm border-top p-2 mx-auto">
+        <footer class="navbar navbar-sm border-top p-2 mt-auto">
             <div class="container-fluid d-flex justify-content-between">
-                <span class="text-muted">&copy; {{ date('Y') }} Laran Panel</span>
+                <span class="text-muted mx-auto">&copy; {{ date('Y') }} Laran Panel</span>
             </div>
         </footer>
     </div>
 
-    {{-- Sidebar. With flex-row-reverse on the parent, this needs to be after the main content in the HTML
-         to visually appear on the left. --}}
-    <div class="sidebar bg-dark text-white overflow-auto">
-
-        <div class="sidebar-section p-3 border-bottom">
-            <div class="d-flex justify-content-between align-items-center">
-                <a href="#" class="fw-bold">
-                    <i id="laran-icon" class="fa-solid fa-angle-down me-1"></i>
-                    <span>{{ lt('Laran Admin') }}</span>
-                </a>
-                <div>
-                    <button class="btn btn-sm btn-outline-light d-none d-lg-inline-flex">
-                        <i class="fa-solid fa-arrows-left-right"></i>
-                    </button>
-                    <button class="btn btn-sm btn-outline-light d-lg-none">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
+    <div class="sidebar text-white bg-dark overflow-auto">
         <div class="sidebar-content p-3">
-            <div class="d-flex align-items-center mb-3">
-                <img src="{{ url('vendor/laran/images/userIcon.png') }}" class="rounded-circle me-2" width="40" height="40">
-                <div>
-                    <div class="fw-semibold">
+            <div class="d-flex flex-column align-items-center text-center mb-2 mt-2">
+                <img src="{{ url('vendor/laran/images/userIcon.png') }}" class="rounded-circle mb-3" width="60" height="60">
+                <div class="mb-1">
+                    <div class="fw-semibold text-white">
                         {{ auth()->guard('manager')->user()?->fullName }}
                     </div>
-                    <small class="text-muted">{{ lt('Administrator') }}</small>
+                    <small class="text">{{ lt('Administrator') }}</small>
                 </div>
             </div>
-             @include('laran::layouts.menu')
+            @include('laran::layouts.menu')
         </div>
     </div>
 </div>
@@ -117,13 +143,16 @@
 @yield('js')
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const laranLink = document.querySelector('.sidebar-section .fw-bold');
-        const laranIcon = document.getElementById('laran-icon');
+        const userDropdownToggle = document.getElementById('user-dropdown-toggle');
+        const userDropdown = userDropdownToggle ? userDropdownToggle.closest('.dropdown') : null;
 
-        if (laranLink && laranIcon) {
-            laranLink.addEventListener('click', function(e) {
-                e.preventDefault(); // Prevent default link behavior
-                laranIcon.classList.toggle('rotated-icon');
+        if (userDropdown && userDropdownToggle) {
+            userDropdown.addEventListener('show.bs.dropdown', function () {
+                userDropdownToggle.classList.add('dropdown-rotate-left');
+            });
+
+            userDropdown.addEventListener('hide.bs.dropdown', function () {
+                userDropdownToggle.classList.remove('dropdown-rotate-left');
             });
         }
     });

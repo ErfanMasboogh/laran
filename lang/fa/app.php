@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'menu' => [
+        'Dashboard' => 'داشبورد',
+    ],
     'Login' => 'ورود',
     'Login to admin panel' => 'ورود به ادمین پنل',
     'Please enter your login credentials' => 'لطفا اطلاعات ورود خود را وارد کنید',
@@ -11,4 +14,5 @@ return [
     'Admin panel' => 'پنل مدیریت',
     'Administrator' => 'مدیر',
     'Logout' => 'خروج',
+    'Today' => 'امروز',
 ];
