@@ -1,0 +1,1 @@
+@include('laran::layouts.admin')
