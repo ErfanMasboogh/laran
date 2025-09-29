@@ -35,6 +35,9 @@ class LaranServiceProvider extends ServiceProvider
         ], 'laran-assets');
         $this->publishes([
             __DIR__ . '/../../database/seeders' => database_path('seeders'),
+        ]);        
+        $this->publishes([
+            __DIR__ . '/../../config' => config_path(),
         ]);
 
 
