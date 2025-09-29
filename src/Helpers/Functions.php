@@ -44,11 +44,4 @@ if (!function_exists('normalizeMobile')) {
 
         return $number;
     }
-
-    if (!function_exists('activeSubMenu')) {
-        function activeSubMenu($routeName, $subRouteName)
-        {
-            return config('laranMenu.' . $routeName . '.child.' . $subRouteName . '.active');
-        }
-    }
 }
