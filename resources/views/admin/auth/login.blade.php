@@ -68,22 +68,27 @@
 </script>
 
 <style>
-    .form-label {
-        color: #212121;
-        font-weight: 500;
+    .card {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
     .form-control {
-        background-color: rgba(255, 255, 255, 0.73);
-        color: #212121;
-        border: 1px solid rgba(255, 255, 255, 0.4);
-        transition: background-color 0.3s, color 0.3s;
+        background-color: #ffffff;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        padding: 0.5rem;
+        transition: all 0.3s ease;
     }
 
     .form-control:focus {
-        background-color: rgba(255, 255, 255, 0.8);
-        color: #212121;
-        outline: none;
-        border-color: #60a5fa;
+        border-color: #e37d2c;
+        box-shadow: 0 3px 5px rgb(179, 102, 42);
+    }
+
+    .control-label {
+        color: #333333;
+        font-weight: bold;
     }
 </style>
