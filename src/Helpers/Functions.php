@@ -41,7 +41,14 @@ if (!function_exists('normalizeMobile')) {
             $number = substr($number, 2);
         }
         $number = ltrim($number, '0');
-        
+
         return $number;
+    }
+
+    if (!function_exists('activeSubMenu')) {
+        function activeSubMenu($routeName, $subRouteName)
+        {
+            return config('laranMenu.' . $routeName . '.child.' . $subRouteName . '.active');
+        }
     }
 }

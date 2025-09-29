@@ -15,7 +15,7 @@ Route::prefix('admin')->middleware('web')->group(function () {
         Route::get('logout', [AuthController::class, 'logout'])->name('admin.logout');
         // Test
         Route::get('dashboard', function () {
-            return '<b>Welcome to dashboard</b>';
+            return view('laran::layouts.admin');
         })->name('admin.dashboard');
     });
 });
