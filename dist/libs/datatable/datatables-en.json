@@ -1,0 +1,17 @@
+{
+    "sProcessing":   "Processing...",
+    "sLengthMenu":   "Show _MENU_ per page",
+    "sZeroRecords":  "No records found",
+    "sInfo":         "Showing _START_ to _END_ of _TOTAL_ entries",
+    "sInfoEmpty":    "No entries available",
+    "sInfoFiltered": "(filtered from _MAX_ total entries)",
+    "sInfoPostFix":  "",
+    "sSearch":       "",
+    "sUrl":          "",
+    "oPaginate": {
+        "sNext":     "Next",
+        "sPrevious": "Previous",
+        "sLast":     "<i class=\"fa fa-step-forward\"></i>",
+        "sFirst":    "<i class=\"fa fa-step-backward\"></i>"
+    }
+}
