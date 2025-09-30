@@ -47,7 +47,7 @@
                 </button>
 
                 <div class="collapse navbar-collapse">
-                    <div class="me-auto">
+                    <div class="ms-auto">
                         <i class="fa-solid fa-calendar"></i>
                          {{ lt('Today') . ' ' . Morilog\Jalali\Jalalian::forge(now())->format('l d F %Y') }}
                     </div>
