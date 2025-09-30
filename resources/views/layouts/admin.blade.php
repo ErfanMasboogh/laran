@@ -46,10 +46,18 @@
                     <i class="fa-solid fa-list"></i>
                 </button>
 
+                @php
+                if (app()->getLocale() == 'fa') {
+                    $date = Morilog\Jalali\Jalalian::forge(now())->format('l d F %Y');
+                } else {
+                    $date = now()->isoFormat('dddd D MMMM YYYY');
+                }
+                @endphp
+
                 <div class="collapse navbar-collapse">
                     <div class="ms-auto">
                         <i class="fa-solid fa-calendar"></i>
-                         {{ lt('Today') . ' ' . Morilog\Jalali\Jalalian::forge(now())->format('l d F %Y') }}
+                         {{ lt('Today') . ' ' . $date }}
                     </div>
                 </div>
 
