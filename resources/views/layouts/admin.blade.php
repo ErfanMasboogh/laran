@@ -10,6 +10,8 @@
     <link href="{{ asset('vendor/laran/fonts/vazir/font-face.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/laran/css/custom.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    @stack('head')
+    @yield('head')
 
     <style>
         .sidebar {
@@ -140,6 +142,7 @@
 </div>
 
 <script src="{{ asset('vendor/laran/js/bootstrap.bundle.min.js') }}"></script>
+@stack('js')
 @yield('js')
 <script>
     document.addEventListener('DOMContentLoaded', function() {
