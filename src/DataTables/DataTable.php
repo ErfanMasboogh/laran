@@ -12,15 +12,8 @@ abstract class DataTable extends BaseDataTable
     public string $styleDataTable = "<'top'>rt<'row'<'col-sm-7'ip><'col-sm-5 index-dataTables_length'l>>";
     public string $disabled = 'style="cursor: not-allowed; opacity: 0.5;" onclick="return false;"';
     public string $orderDirection = 'desc'; // asc or desc
-    public int $pageLength = 50;
+    public int $pageLength = 10;
     public int $orderByColumn = 0;
-
-    /**
-     * Get getColumns definition.
-     *
-     * @return array
-     */
-    abstract public function getColumns(): array;
 
     /**
      * Optional method if you want to use the html builder.
@@ -72,4 +65,11 @@ abstract class DataTable extends BaseDataTable
             ],
         ];
     }
+
+    /**
+     * Get getColumns definition.
+     *
+     * @return array
+     */
+    abstract public function getColumns(): array;
 }
