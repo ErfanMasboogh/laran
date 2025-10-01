@@ -5,6 +5,8 @@ namespace ErfanMasboogh\Laran\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage as BaseStorage;
 
 class Storage extends Model
 {
@@ -40,4 +42,53 @@ class Storage extends Model
       'created' => 'integer',
       'updated' => 'integer',
     ];
+
+    public static function upload($file)
+    {
+        $fileType = $file->getClientMimeType();
+        $fileType = explode('/', $fileType)[0];
+
+        $fileExtension = $file->getClientOriginalExtension();
+        $fileSize = $file->getSize();
+
+        $fileName = $file->getClientOriginalPath();
+        $fileName = preg_replace('/[^\p{L}\p{N}\s-]/u', '', strip_tags($fileName));
+        $fileName = mb_substr(rtrim($fileName, $fileExtension), 0, 127);
+
+        $userID = Auth::id() ?? 0;
+
+        $SID = uuid_create();
+        static::prepareForStore($SID);
+
+
+        BaseStorage::disk('public')->put(config('laran.storage.tempPath') . $SID , $file->getContent());
+
+        static::query()
+            ->create([
+                'SID' => $SID,
+                'userID' => $userID,
+                'fileType' => $fileType,
+                'fileName' => $fileName,
+                'fileExtension' => $fileExtension,
+                'fileSize' => $fileSize,
+            ]);
+    }
+
+    private static function prepareForStore(&$SID)
+    {
+        $tempPath = base_path() . '/storage/app/public/' . config('laran.storage.tempPath');
+        if (!is_dir($tempPath)) {
+            mkdir($tempPath, 0755, true);
+        }
+
+        while (true) {
+            $storage = Storage::query()
+                ->where('SID', $SID)
+                ->exists();
+            if (!$storage) {
+                break;
+            }
+            $SID = uuid_create();
+        }
+    }
 }
