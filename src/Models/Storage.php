@@ -40,6 +40,12 @@ class Storage extends Model
         'updated' => 'integer',
     ];
 
+    /**
+     * Store the received file after changes in temporary file's directory with unique name
+     *
+     * @param $file
+     * @return Storage
+     */
     public static function upload($file)
     {
         $fileType = $file->getClientMimeType();
@@ -72,6 +78,12 @@ class Storage extends Model
         return $storage;
     }
 
+    /**
+     * Ensure the temporary directory existance and SID uniqueness   
+     *
+     * @param $SID
+     * @return void
+     */
     private static function prepareForStore(&$SID)
     {
         $tempPath = base_path() . '/storage/app/public/' . config('laran.storage.tempPath');
