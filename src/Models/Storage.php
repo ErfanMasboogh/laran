@@ -2,9 +2,6 @@
 
 namespace ErfanMasboogh\Laran\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage as BaseStorage;
 
@@ -29,18 +26,18 @@ class Storage extends Model
     ];
 
     protected $casts = [
-      'SID' => 'string',
-      'userID' => 'integer',
-      'storable_type' => 'string',
-      'storable_id' => 'integer',
-      'fileType' => 'string',
-      'fileName' => 'string',
-      'fileExtension' => 'string',
-      'fileSize' => 'integer',
-      'isUsed' => 'boolean',
-      'isPublic' => 'boolean',
-      'created' => 'integer',
-      'updated' => 'integer',
+        'SID' => 'string',
+        'userID' => 'integer',
+        'storable_type' => 'string',
+        'storable_id' => 'integer',
+        'fileType' => 'string',
+        'fileName' => 'string',
+        'fileExtension' => 'string',
+        'fileSize' => 'integer',
+        'isUsed' => 'boolean',
+        'isPublic' => 'boolean',
+        'created' => 'integer',
+        'updated' => 'integer',
     ];
 
     public static function upload($file)
@@ -61,10 +58,9 @@ class Storage extends Model
         static::prepareForStore($SID);
 
 
-        BaseStorage::disk('public')->put(config('laran.storage.tempPath') . $SID , $file->getContent());
+        BaseStorage::disk('public')->put(config('laran.storage.tempPath') . $SID, $file->getContent());
 
-        static::query()
-            ->create([
+        $storage = static::create([
                 'SID' => $SID,
                 'userID' => $userID,
                 'fileType' => $fileType,
@@ -72,6 +68,8 @@ class Storage extends Model
                 'fileExtension' => $fileExtension,
                 'fileSize' => $fileSize,
             ]);
+
+        return $storage;
     }
 
     private static function prepareForStore(&$SID)
