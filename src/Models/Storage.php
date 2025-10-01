@@ -21,6 +21,7 @@ class Storage extends Model
         'fileName',
         'fileExtension',
         'fileSize',
+        'additionalPath',
         'isUsed',
         'isPublic',
     ];
@@ -34,6 +35,7 @@ class Storage extends Model
         'fileName' => 'string',
         'fileExtension' => 'string',
         'fileSize' => 'integer',
+        'additionalPath' => 'string',
         'isUsed' => 'boolean',
         'isPublic' => 'boolean',
         'created' => 'integer',
@@ -46,7 +48,7 @@ class Storage extends Model
      * @param $file
      * @return Storage
      */
-    public static function upload($file)
+    public static function upload($file, $additionalPath = null)
     {
         $fileType = $file->getClientMimeType();
         $fileType = explode('/', $fileType)[0];
@@ -60,6 +62,9 @@ class Storage extends Model
 
         $userID = Auth::id() ?? 0;
 
+        $additionalPath = trim($additionalPath, '/');
+        $additionalPath .= '/' ;
+        
         $SID = uuid_create();
         static::prepareForStore($SID);
 
@@ -73,13 +78,14 @@ class Storage extends Model
                 'fileName' => $fileName,
                 'fileExtension' => $fileExtension,
                 'fileSize' => $fileSize,
+                'additionalPath' => $additionalPath,
             ]);
 
         return $storage;
     }
 
     /**
-     * Ensure the temporary directory existance and SID uniqueness   
+     * Ensure the temporary directory existance and SID uniqueness
      *
      * @param $SID
      * @return void
