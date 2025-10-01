@@ -63,7 +63,7 @@ class Storage extends Model
         $userID = Auth::id() ?? 0;
 
         $additionalPath = trim($additionalPath, '/') . '/';
-        
+
         $SID = uuid_create();
         static::prepareForStore($SID);
 
@@ -105,5 +105,38 @@ class Storage extends Model
             }
             $SID = uuid_create();
         }
+    }
+
+    public function useFor($model, $isPublic = true)
+    {
+        $storable_type = null;
+        $storable_id = $model->ID;
+
+        $namespaces = [
+            "App\\Models\\",
+            "ErfanMasboogh\\Laran\\Models\\",
+        ];
+
+        foreach ($namespaces as $namespace) {
+            $class = $namespace . class_basename($model);
+            if (class_exists($class)) {
+                $storable_type = $class;
+            }
+        }
+
+
+        $storePath = config('laran.storage.path') . lcfirst(class_basename($model)) . '/' . $this->additionalPath ;
+        if (!is_dir(base_path() . $storePath)) {
+            mkdir(base_path() . $storePath, 0755, true);
+        }
+
+        BaseStorage::disk('public')->move(config('laran.storage.tempPath') . $this->SID, $storePath . $this->SID);
+
+        $this->update([
+            'storable_type' => $storable_type,
+            'storable_id' => $storable_id,
+            'isPublic' => $isPublic,
+            'isUsed' => true,
+        ]);
     }
 }

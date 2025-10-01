@@ -16,7 +16,7 @@ return [
         ],
     ],
     'storage' => [
-        'path' => 'public/uploads/',
-        'tempPath' => 'public/uploads/temp/'
+        'path' => 'uploads/',
+        'tempPath' => 'uploads/_temp/'
     ]
 ];
