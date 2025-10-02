@@ -14,5 +14,9 @@ return [
                 'model' => \ErfanMasboogh\Laran\Models\Manager::class,
             ],
         ],
+    ],
+    'storage' => [
+        'path' => 'uploads/',
+        'tempPath' => 'uploads/_temp/'
     ]
 ];
