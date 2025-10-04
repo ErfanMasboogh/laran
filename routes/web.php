@@ -2,6 +2,7 @@
 
 use ErfanMasboogh\Laran\Http\Controllers\Web\AuthController;
 use ErfanMasboogh\Laran\Http\Controllers\Web\DashboardController;
+use ErfanMasboogh\Laran\Http\Controllers\Web\ManagerController;
 use ErfanMasboogh\Laran\Http\Controllers\Web\StorageController;
 use ErfanMasboogh\Laran\Middleware\AuthenticateManager;
 use ErfanMasboogh\Laran\Middleware\RedirectIfManagerAuthenticated;
@@ -17,6 +18,11 @@ Route::prefix('admin')->middleware('web')->group(function () {
     Route::middleware(AuthenticateManager::class)->group(function () {
         Route::get('logout', [AuthController::class, 'logout'])->name('admin.logout');
         Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+        
+        Route::group(['prefix' => 'manager'], function () {
+            Route::get('/create', [ManagerController::class, 'create'])->name('admin.manager.create');
+        });
+        
     });
 });
 

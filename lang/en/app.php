@@ -15,4 +15,10 @@ return [
     'Administrator' => 'Administrator',
     'Logout' => 'Logout',
     'Today' => 'Today',
+    'Create manager' => 'Create manager',
+    'Name' => 'Name',
+    'Family' => 'Family',
+    'Image' => 'Image',
+    'Submit' => 'Submit',
+    'Return' => 'Return',
 ];

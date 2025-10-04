@@ -15,4 +15,10 @@ return [
     'Administrator' => 'مدیر',
     'Logout' => 'خروج',
     'Today' => 'امروز',
+    'Create manager' => 'افزودن مدیر',
+    'Name' => 'نام',
+    'Family' => 'نام خانوادگی',
+    'Image' => 'تصویر',
+    'Submit' => 'ثبت',
+    'Return' => 'بازگشت',
 ];

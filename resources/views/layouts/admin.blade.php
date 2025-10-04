@@ -98,7 +98,7 @@
                         <div class="container-fluid">
                             <div class="row mb-2">
                                 <div class="col-sm-12">
-                                    <h4 class="m-0">
+                                    <h4 class="mb-4">
                                         @yield('pageTitle')
                                     </h4>
                                 </div><!-- /.col -->
