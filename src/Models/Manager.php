@@ -20,6 +20,7 @@ class Manager extends Authenticatable
         'family',
         'mobile',
         'status',
+        'imageSID',
         'password',
     ];
 
@@ -46,6 +47,7 @@ class Manager extends Authenticatable
             'family' => 'string',
             'mobile' => 'string',
             'status' => 'string',
+            'imageSID' => 'string',
         ];
     }
 

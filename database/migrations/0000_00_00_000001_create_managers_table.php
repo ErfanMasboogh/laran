@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('mobile', 32)->unique();
             $table->enum('status', ['active', 'inactive', 'deleted'])->default('active');
             $table->string('password');
+            $table->string('imageSID');
         });
     }
 
