@@ -1,11 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use ErfanMasboogh\Laran\Http\Controllers\Web\AuthController;
 use ErfanMasboogh\Laran\Http\Controllers\Web\DashboardController;
 use ErfanMasboogh\Laran\Http\Controllers\Web\StorageController;
 use ErfanMasboogh\Laran\Middleware\AuthenticateManager;
 use ErfanMasboogh\Laran\Middleware\RedirectIfManagerAuthenticated;
+use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->middleware('web')->group(function () {
     // Routes without auth
@@ -19,5 +19,9 @@ Route::prefix('admin')->middleware('web')->group(function () {
         Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     });
 });
-Route::get('/download/{sid}', [StorageController::class, 'download'])->name('storage.download');
+
+// Storage
+Route::get('/storage/download/{sid}', [StorageController::class, 'download'])->middleware('web')->name(
+    'storage.download'
+);
 
