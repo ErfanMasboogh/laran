@@ -2,13 +2,14 @@
 
 namespace ErfanMasboogh\Laran\Models;
 
+use ErfanMasboogh\Laran\Models\Traits\HasStorage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class Manager extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasStorage;
 
     public $primaryKey = 'ID';
     public $timestamps = false;
