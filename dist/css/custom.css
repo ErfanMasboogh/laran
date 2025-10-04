@@ -95,13 +95,31 @@ img.rounded-circle {
 
 .form-control:focus {
     border-color: #e37d2c;
-    box-shadow: 0 3px 5px rgb(179, 102, 42);
+    box-shadow: 0 1px 5px rgb(179, 102, 42);
 }
 
 .control-label {
     color: #333333;
     font-weight: bold;
+    margin-right: 4px;
 }
 .dropdown-item:active{
     background-color: #e37d2c;
+}
+
+.btn-primary {
+    background-color: #e37d2c;
+    border-color: #e37d2c;
+}
+
+.btn-flat-primary {
+    background-color: rgba(246, 182, 130, 0.4);
+    border-color: #e37d2c;
+    color: #e37d2c;
+}
+
+.btn-flat-secondary {
+    background-color: rgba(108, 117, 125, 0.4);
+    border-color: #2d2e30;
+    color: #2d2e30;
 }
