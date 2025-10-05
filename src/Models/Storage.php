@@ -62,7 +62,7 @@ class Storage extends Model
 
         $userID = Auth::id() ?? 0;
 
-        $additionalPath = trim($additionalPath, '/') . '/';
+        $additionalPath = $additionalPath ? (trim($additionalPath, '/') . '/') : null;
 
         $SID = uuid_create();
         static::prepareForStore($SID);
