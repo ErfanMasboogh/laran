@@ -18,11 +18,12 @@ Route::prefix('admin')->middleware('web')->group(function () {
     Route::middleware(AuthenticateManager::class)->group(function () {
         Route::get('logout', [AuthController::class, 'logout'])->name('admin.logout');
         Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-        
+
         Route::group(['prefix' => 'manager'], function () {
             Route::get('/create', [ManagerController::class, 'create'])->name('admin.manager.create');
+            Route::post('/store', [ManagerController::class, 'store'])->name('admin.manager.store');
         });
-        
+
     });
 });
 

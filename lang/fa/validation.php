@@ -107,8 +107,10 @@ return [
     'uuid' => ':attribute باید یک UUID معتبر باشد.',
     'mobile' => 'فیلد :attribute باید یک شماره موبایل معتبر باشد.',
     'attributes' => [
-        'Name' => 'نام',
+        'name' => 'نام',
         'mobile' => 'شماره موبایل',
-        'password' => 'رمز عبور'
+        'password' => 'رمز عبور',
+        'family' => 'نام خانوادگی',
+        'image' => 'تصویر',
     ]
 ];

@@ -21,4 +21,5 @@ return [
     'Image' => 'Image',
     'Submit' => 'Submit',
     'Return' => 'Return',
+    'Operation done successfully' => 'Operation done successfully.',
 ];

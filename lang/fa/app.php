@@ -7,7 +7,7 @@ return [
     'Login' => 'ورود',
     'Login to admin panel' => 'ورود به ادمین پنل',
     'Please enter your login credentials' => 'لطفا اطلاعات ورود خود را وارد کنید',
-    'Mobile' => 'موبایل',
+    'Mobile' => 'شماره موبایل',
     'Password' => 'رمز عبور',
     'Rate limit error' => 'تعداد تلاش های ناموفق شما بیش از حد مجاز بوده است. لطفاً بعد از :seconds ثانیه دوباره امتحان کنید.',
     'Invalid credentials' => 'اطلاعات وارد شده نادرست است. لطفاً موبایل و رمز عبور خود را بررسی کنید.',
@@ -21,4 +21,5 @@ return [
     'Image' => 'تصویر',
     'Submit' => 'ثبت',
     'Return' => 'بازگشت',
+    'Operation done successfully' => 'عملیات با موفقیت انجام شد.',
 ];
