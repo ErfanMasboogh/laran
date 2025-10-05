@@ -83,4 +83,9 @@ abstract class DataTable extends BaseDataTable
 
         return '<div><img src="' . $imagePath . '" style="width: 75px; height: 75px; border-radius: 10px" ></img></div>';
     }
+
+    public function editAction(string $route): string
+    {
+        return '<div><a href="' . $route . '" class="btn btn-sm btn-outline-success"><i class="fa fa-lg fa-edit"></i></a></div>';
+    }
 }
