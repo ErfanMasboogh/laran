@@ -3,6 +3,7 @@
 return [
     'menu' => [
         'Dashboard' => 'داشبورد',
+        'Managers list' => 'لیست مدیرها',
     ],
     'Login' => 'ورود',
     'Login to admin panel' => 'ورود به ادمین پنل',
@@ -22,4 +23,6 @@ return [
     'Submit' => 'ثبت',
     'Return' => 'بازگشت',
     'Operation done successfully' => 'عملیات با موفقیت انجام شد.',
+    'Filter' => 'فیلتر',
+    'Image preview' => 'پیش‌‌نمایش تصویر',
 ];

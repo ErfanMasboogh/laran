@@ -3,6 +3,7 @@
 return [
     'menu' => [
         'Dashboard' => 'Dashboard',
+        'Managers list' => 'Managers list',
     ],
     'Login' => 'Login',
     'Login to admin panel' => 'Login to admin panel',
@@ -22,4 +23,6 @@ return [
     'Submit' => 'Submit',
     'Return' => 'Return',
     'Operation done successfully' => 'Operation done successfully.',
+    'Filter' => 'Filter',
+    'Image preview' => 'Image preview',
 ];

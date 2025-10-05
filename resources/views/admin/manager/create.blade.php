@@ -40,8 +40,8 @@
         <div class="card-body">
             <div class="text-right">
                 <div class="gap-2">
-                    {{ html()->submit(lt('Submit'))->class('btn btn-flat-primary') }}
-                    {{ html()->a('#', lt('Return'))->class('btn btn-flat-secondary') }}
+                    {{ html()->submit(lt('Submit'))->class('btn btn-primary') }}
+                    {{ html()->a(route('admin.manager.list'), lt('Return'))->class('btn btn-secondary') }}
                 </div>
             </div>
         </div>

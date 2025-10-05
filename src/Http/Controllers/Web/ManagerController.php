@@ -2,6 +2,7 @@
 
 namespace ErfanMasboogh\Laran\Http\Controllers\Web;
 
+use ErfanMasboogh\Laran\DataTables\ManagerDatatable;
 use ErfanMasboogh\Laran\Http\Requests\Web\Manager\StoreRequest;
 use ErfanMasboogh\Laran\Models\Manager;
 use ErfanMasboogh\Laran\Models\Storage;
@@ -31,5 +32,14 @@ class ManagerController extends Controller
         $managerService->createManager($data);
 
         return back()->with('success', lt('Operation done successfully'));
+    }
+
+    /**
+     * @param ManagerDatatable $dataTable
+     * @return mixed
+     */
+    public function list(ManagerDatatable $dataTable)
+    {
+        return $dataTable->render('laran::admin.manager.list');
     }
 }
