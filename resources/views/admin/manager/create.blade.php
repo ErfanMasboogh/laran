@@ -46,5 +46,5 @@
             </div>
         </div>
     </div>
-    {{ html()->form('POST')->close() }}
+    {{ html()->form()->close() }}
 @endsection

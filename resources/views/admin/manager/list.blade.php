@@ -4,7 +4,7 @@
 
 @section('button')
     <div>
-        {{ html()->a(route('admin.manager.create'), lt('Create manager'))->class('btn btn-primary') }}
+        {{ html()->a(route('admin.manager.create'), lt('Create manager'))->class('btn btn-flat-primary') }}
     </div>
 @endsection
 
