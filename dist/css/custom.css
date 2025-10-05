@@ -113,8 +113,13 @@ img.rounded-circle {
 }
 
 .btn-primary:hover {
-    background-color: #d66916;
-    border-color: #d66916;
+    background-color: #cc6412;
+    border-color: #cc6412;
+}
+
+.btn-primary:active {
+    background-color: #cc6412 !important;
+    border-color: #cc6412 !important;
 }
 
 .btn-flat-primary {

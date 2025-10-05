@@ -5,11 +5,12 @@
 @endpush
 
 @section('content')
-    @if(view()->hasSection('formFields'))
-        <div class="admin-soft-table-card mb-4">
+    @if(view()->hasSection('filter'))
+        <div class="admin-soft-table-card mb-4" style="margin-top: -8px">
             <div class="admin-table-title">
-                <i class="fas fa-filter"></i> {{ st('Filter') }}
+                <i class="fas fa-filter"></i> {{ lt('Filter') }}
             </div>
+            <hr style="margin-top: -12px;">
             {!! html()->form('GET', url()->current())->class('form')->open() !!}
             <div class="row">
                 @yield('filter')
@@ -23,7 +24,7 @@
     @endif
 
     @if(view()->hasSection('button'))
-        <div class="admin-soft-table-card mb-2">
+        <div class="admin-soft-table-card mb-4" style="margin-top: -8px">
             <div class="d-flex justify-content-start">
                 <div class="mr-2">
                     @yield('button')
@@ -32,7 +33,7 @@
         </div>
     @endif
 
-    <div class="admin-soft-table-card">
+    <div class="admin-soft-table-card" style="margin-top: -4px">
         <div class="table-responsive">
             {{ $dataTable->table(['class' => 'table soft-table']) }}
         </div>
