@@ -18,7 +18,7 @@ return [
         'array' => ':attribute باید بین :min و :max آیتم داشته باشد.',
     ],
     'boolean' => 'فیلد :attribute باید مقدار صحیح یا غلط باشد.',
-    'confirmed' => 'تأییدیه :attribute مطابقت ندارد.',
+    'confirmed' => 'تکرار :attribute مطابقت ندارد.',
     'date' => ':attribute یک تاریخ معتبر نیست.',
     'date_equals' => ':attribute باید تاریخی برابر با :date باشد.',
     'date_format' => ':attribute با قالب :format مطابقت ندارد.',

@@ -134,6 +134,12 @@ img.rounded-circle {
     color: #ffffff;
 }
 
+.btn-flat-primary:active {
+    background-color: #e37d2c !important;
+    border-color: #e37d2c !important;
+    color: #ffffff !important;
+}
+
 .btn-flat-secondary {
     background-color: rgba(108, 117, 125, 0.4);
     border-color: #2d2e30;

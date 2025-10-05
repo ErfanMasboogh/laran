@@ -19,19 +19,27 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6 mb-4">
+                        {{ html()->label(lt('Image'), 'image')->class('control-label') }}
+                        <x-laran::file-uploader name="image" accept="{{ config('laran.storage.types.image.accept') }}"/>
+                    </div>
+                    <div class="col-md-6 mb-4">
                         {{ html()->label(lt('Mobile'), 'mobile')->class('control-label required') }}
                         {{ html()->number('mobile', old('mobile'))->class('form-control')->placeholder(lt('Mobile'))->attributes(['min' => 0]) }}
                     </div>
-                    <div class="col-md-6 mb-4">
-                        {{ html()->label(lt('Password'), 'password')->class('control-label required') }}
-                        {{ html()->password('password', old('password'))->class('form-control')->placeholder(lt('Password')) }}
-                    </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6 mb-4">
-                        {{ html()->label(lt('Image'), 'image')->class('control-label') }}
-                        <x-laran::file-uploader name="image" accept="{{ config('laran.storage.types.image.accept') }}" />
-                    </div>
+            </div>
+        </div>
+    </div>
+    <div class="card mt-5">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    {{ html()->label(lt('Password'), 'password')->class('control-label required') }}
+                    {{ html()->password('password', old('password'))->class('form-control')->placeholder(lt('Password')) }}
+                </div>
+                <div class="col-md-6 mb-4">
+                    {{ html()->label(lt('Password confirmation'), 'password_confirmation')->class('control-label required') }}
+                    {{ html()->password('password_confirmation', old('password'))->class('form-control')->placeholder(lt('Password confirmation')) }}
                 </div>
             </div>
         </div>

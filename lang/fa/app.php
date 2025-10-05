@@ -31,4 +31,5 @@ return [
     'Current password' => 'رمز عبور فعلی',
     'New password' => 'رمز عبور جدید',
     'Show file' => 'مشاهده فایل',
+    'Password confirmation' => 'تکرار رمز عبور',
 ];

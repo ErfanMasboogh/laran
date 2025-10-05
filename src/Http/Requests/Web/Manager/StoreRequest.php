@@ -19,7 +19,7 @@ class StoreRequest extends WebRequest
             'name' => ['required', 'string', 'max:255'],
             'family' => ['required', 'string', 'max:255'],
             'mobile' => ['required', 'validMobile', Rule::unique('managers', 'mobile')],
-            'password' => ['required', 'string', 'min:8', 'max:32'],
+            'password' => ['required', 'string', 'min:8', 'max:32', 'confirmed'],
             'image' => array_merge(config('laran.storage.types.image.validation'), ['nullable'])
         ];
     }
