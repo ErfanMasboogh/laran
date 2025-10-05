@@ -10,7 +10,7 @@
 
     <!-- button (only if SID is provided) -->
     @if($SID)
-        <a href="{{ route('storage.download', $SID) }}" class="btn btn-outline-primary mb-3 file-btn" target="_blank">{{ lt('Show file') }}</a>
+        <a href="{{ route('storage.download', $SID) }}" class="btn btn-flat-primary mb-3 file-btn" target="_blank">{{ lt('Show file') }}</a>
     @endif
 
     <!-- preview area (hidden initially) -->
