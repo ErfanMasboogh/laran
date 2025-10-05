@@ -25,4 +25,10 @@ return [
     'Operation done successfully' => 'عملیات با موفقیت انجام شد.',
     'Filter' => 'فیلتر',
     'Image preview' => 'پیش‌‌نمایش تصویر',
+    'Edit' => 'ویرایش',
+    'Edit manager' => 'ویرایش مدیر',
+    'New password confirmation' => 'تکرار رمز عبور جدید',
+    'Current password' => 'رمز عبور فعلی',
+    'New password' => 'رمز عبور جدید',
+    'Show file' => 'مشاهده فایل',
 ];

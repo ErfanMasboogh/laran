@@ -25,4 +25,10 @@ return [
     'Operation done successfully' => 'Operation done successfully.',
     'Filter' => 'Filter',
     'Image preview' => 'Image preview',
+    'Edit' => 'Edit',
+    'Edit manager' => 'Edit manager',
+    'New password confirmation' => 'New password confirmation',
+    'Current password' => 'Current password',
+    'New password' => 'New password',
+    'Show file' => 'Show file',
 ];

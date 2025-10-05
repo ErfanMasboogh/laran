@@ -42,4 +42,13 @@ class ManagerController extends Controller
     {
         return $dataTable->render('laran::admin.manager.list');
     }
+
+    /**
+     * @param Manager $manager
+     * @return View
+     */
+    public function edit(Manager $manager)
+    {
+        return view('laran::admin.manager.edit', compact('manager'));
+    }
 }

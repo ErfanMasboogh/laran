@@ -7,6 +7,7 @@ return [
         'active' => [
             'admin.manager.list',
             'admin.manager.create',
+            'admin.manager.edit',
         ]
     ]
 ];
