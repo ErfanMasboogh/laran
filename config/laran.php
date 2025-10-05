@@ -17,6 +17,16 @@ return [
     ],
     'storage' => [
         'path' => 'uploads/',
-        'tempPath' => 'uploads/_temp/'
+        'tempPath' => 'uploads/_temp/',
+        'types' => [
+            'image' => [
+                'accept' => ['.jpeg, .png, .jpg, .webp'],
+                'validation' => [
+                    'image',
+                    'max:5120', // Equals to 5 Mb
+                    'mimes:jpeg,jpg,png,webp',
+                ]
+            ]
+        ]
     ]
 ];
