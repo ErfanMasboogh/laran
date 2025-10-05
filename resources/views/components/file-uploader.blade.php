@@ -1,11 +1,17 @@
 @props([
     'name' => '',
     'accept' => '*',
+    'SID' => null,
 ])
 
 <div class="file-uploader">
     <!-- main file input -->
-    <input type="file" name="{{ $name }}" accept="{{$accept}}" class="form-control file-input mb-4">
+    <input type="file" name="{{ $name }}" accept="{{ $accept }}" class="form-control file-input mb-4">
+
+    <!-- button (only if SID is provided) -->
+    @if($SID)
+        <a href="{{ route('storage.download', $SID) }}" class="btn btn-outline-primary mb-3 file-btn" target="_blank">{{ lt('Show file') }}</a>
+    @endif
 
     <!-- preview area (hidden initially) -->
     <div class="preview" hidden>
@@ -25,6 +31,7 @@
         <p class="preview-filename text-muted mb-2" hidden></p>
     </div>
 </div>
+
 <script>
     (function(){
         function ensureJQuery(callback){
@@ -40,6 +47,7 @@
                 var $wrap = $(this);
                 var $input = $wrap.find('.file-input');
                 var $preview = $wrap.find('.preview');
+                var $btn = $wrap.find('.file-btn'); // button (if exists)
                 var $img = $wrap.find('.preview-img');
                 var $audio = $wrap.find('.preview-audio');
                 var $video = $wrap.find('.preview-video');
@@ -55,11 +63,12 @@
                     $fname.attr('hidden', true).text('');
                 }
 
-                // Initially hide all
+                // Initially hide all previews
                 hideAllPreviews();
 
                 $input.on('change', function(){
                     hideAllPreviews();
+                    if ($btn.length) $btn.attr('hidden', true); // hide button if exists
 
                     var file = this.files && this.files[0];
                     if (!file) return;
