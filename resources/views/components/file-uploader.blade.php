@@ -1,10 +1,11 @@
 @props([
     'name' => '',
+    'accept' => '*',
 ])
 
 <div class="file-uploader">
     <!-- main file input -->
-    <input type="file" name="{{ $name }}" class="form-control file-input mb-4">
+    <input type="file" name="{{ $name }}" accept="{{$accept}}" class="form-control file-input mb-4">
 
     <!-- preview area (hidden initially) -->
     <div class="preview" hidden>
