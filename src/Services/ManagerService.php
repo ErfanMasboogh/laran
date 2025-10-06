@@ -47,7 +47,7 @@ class ManagerService
 
         if ($hasImage) {
             Storage::deleteBySID($manager->imageSID);
-            
+
             $storage = Storage::upload($data['image']);
         }
 
@@ -64,5 +64,20 @@ class ManagerService
         }
 
         return $manager;
+    }
+
+    /**
+     * @param Manager $manager
+     * @return void
+     */
+    public function deleteManager(Manager $manager)
+    {
+        $hasImage = isset($manager->imageSID);
+
+        if ($hasImage) {
+            Storage::deleteBySID($manager->imageSID);
+        }
+
+        $manager->delete();
     }
 }

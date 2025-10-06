@@ -39,7 +39,10 @@ class ManagerDatatable extends DataTable
             ->addColumn('edit', function ($model) {
                 return $this->editAction(route('admin.manager.edit', $model->ID));
             })
-            ->rawColumns(['image', 'edit'])
+            ->addColumn('delete', function ($model) {
+                return $this->deleteAction(route('admin.manager.delete', $model->ID));
+            })
+            ->rawColumns(['image', 'edit', 'delete'])
             ->setTotalRecords($query->count())
             ->addIndexColumn()
             ->orderColumn('ID', ':column $1')
@@ -66,6 +69,7 @@ class ManagerDatatable extends DataTable
             Column::make('family')->title(lt('Family'))->orderable(false),
             Column::make('mobile')->title(lt('Mobile'))->orderable(false),
             Column::make('edit')->title(lt('Edit'))->orderable(false),
+            Column::make('delete')->title(lt('Delete'))->orderable(false),
         ];
     }
 }

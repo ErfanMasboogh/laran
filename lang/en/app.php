@@ -32,4 +32,6 @@ return [
     'New password' => 'New password',
     'Show file' => 'Show file',
     'Wrong current password' => 'Current password is wrong.',
+    'Delete' => 'Delete',
+    'Deletion ensure' => 'Are you sure to delete this item?'
 ];

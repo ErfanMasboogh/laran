@@ -82,4 +82,15 @@ class ManagerController extends Controller
 
         return redirect()->route('admin.manager.list')->with('success', lt('Operation done successfully'));
     }
+
+    /**
+     * @param Manager $manager
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function delete(Manager $manager)
+    {
+        $this->managerService->deleteManager($manager);
+        
+        return back()->with('success', lt('Operation done successfully'));
+    }
 }
