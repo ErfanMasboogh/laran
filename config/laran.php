@@ -20,7 +20,7 @@ return [
         'tempPath' => 'uploads/_temp/',
         'types' => [
             'image' => [
-                'accept' => ['.jpeg, .png, .jpg, .webp'],
+                'accept' => '.jpeg, .png, .jpg, .webp',
                 'validation' => [
                     'image',
                     'max:5120', // Equals to 5 Mb
