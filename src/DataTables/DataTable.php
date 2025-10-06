@@ -88,4 +88,16 @@ abstract class DataTable extends BaseDataTable
     {
         return '<div><a href="' . $route . '" class="btn btn-sm btn-outline-success"><i class="fa fa-lg fa-edit"></i></a></div>';
     }
+
+    public function deleteAction(string $route): string
+    {
+        return '
+    <div>
+        <a href="' . $route . '"
+       class="btn btn-sm btn-outline-danger"
+       onclick="return confirm(\'' . lt('Deletion ensure') .'\')">
+        <i class="fa fa-lg fa-trash"></i>
+        </a>
+    </div>';
+    }
 }
