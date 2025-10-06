@@ -3,6 +3,7 @@
 return [
     'menu' => [
         'Dashboard' => 'Dashboard',
+        'Managers list' => 'Managers list',
     ],
     'Login' => 'Login',
     'Login to admin panel' => 'Login to admin panel',
@@ -15,4 +16,22 @@ return [
     'Administrator' => 'Administrator',
     'Logout' => 'Logout',
     'Today' => 'Today',
+    'Create manager' => 'Create manager',
+    'Name' => 'Name',
+    'Family' => 'Family',
+    'Image' => 'Image',
+    'Submit' => 'Submit',
+    'Return' => 'Return',
+    'Operation done successfully' => 'Operation done successfully.',
+    'Filter' => 'Filter',
+    'Image preview' => 'Image preview',
+    'Edit' => 'Edit',
+    'Edit manager' => 'Edit manager',
+    'New password confirmation' => 'New password confirmation',
+    'Current password' => 'Current password',
+    'New password' => 'New password',
+    'Show file' => 'Show file',
+    'Wrong current password' => 'Current password is wrong.',
+    'Delete' => 'Delete',
+    'Deletion ensure' => 'Are you sure to delete this item?'
 ];

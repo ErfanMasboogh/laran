@@ -2,6 +2,7 @@
 
 use ErfanMasboogh\Laran\Http\Controllers\Web\AuthController;
 use ErfanMasboogh\Laran\Http\Controllers\Web\DashboardController;
+use ErfanMasboogh\Laran\Http\Controllers\Web\ManagerController;
 use ErfanMasboogh\Laran\Http\Controllers\Web\StorageController;
 use ErfanMasboogh\Laran\Middleware\AuthenticateManager;
 use ErfanMasboogh\Laran\Middleware\RedirectIfManagerAuthenticated;
@@ -17,6 +18,16 @@ Route::prefix('admin')->middleware('web')->group(function () {
     Route::middleware(AuthenticateManager::class)->group(function () {
         Route::get('logout', [AuthController::class, 'logout'])->name('admin.logout');
         Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+
+        // Manager
+        Route::group(['prefix' => 'manager'], function () {
+            Route::get('/list', [ManagerController::class, 'list'])->name('admin.manager.list');
+            Route::get('/create', [ManagerController::class, 'create'])->name('admin.manager.create');
+            Route::post('/store', [ManagerController::class, 'store'])->name('admin.manager.store');
+            Route::get('/edit/{manager}', [ManagerController::class, 'edit'])->name('admin.manager.edit');
+            Route::post('/update/{manager}', [ManagerController::class, 'update'])->name('admin.manager.update');
+            Route::get('/delete/{manager}', [ManagerController::class, 'delete'])->name('admin.manager.delete');
+        });
     });
 });
 

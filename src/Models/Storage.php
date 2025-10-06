@@ -3,6 +3,7 @@
 namespace ErfanMasboogh\Laran\Models;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage as BaseStorage;
 
 class Storage extends Model
@@ -43,6 +44,38 @@ class Storage extends Model
     ];
 
     /**
+     * Call clearCache method after each save and deletion
+     * @return void
+     */
+    public static function booted()
+    {
+        static::saved(function () {
+            self::clearCache();
+        });
+        static::deleted(function () {
+            self::clearCache();
+        });
+    }
+
+    /**
+     * Flush the method's cache tag
+     * @return bool
+     */
+    public static function clearCache()
+    {
+        return Cache::tags(self::cacheTag())->flush();
+    }
+
+    /**
+     * @param $tag
+     * @return string
+     */
+    public static function cacheTag($tag = ''): string
+    {
+        return 'storage' . $tag;
+    }
+
+    /**
      * Store the received file after changes in temporary file's directory with unique name
      *
      * @param $file
@@ -62,7 +95,7 @@ class Storage extends Model
 
         $userID = Auth::id() ?? 0;
 
-        $additionalPath = trim($additionalPath, '/') . '/';
+        $additionalPath = $additionalPath ? (trim($additionalPath, '/') . '/') : null;
 
         $SID = uuid_create();
         static::prepareForStore($SID);
@@ -71,14 +104,14 @@ class Storage extends Model
         BaseStorage::disk('public')->put(config('laran.storage.tempPath') . $SID, $file->getContent());
 
         $storage = static::create([
-                'SID' => $SID,
-                'userID' => $userID,
-                'fileType' => $fileType,
-                'fileName' => $fileName,
-                'fileExtension' => $fileExtension,
-                'fileSize' => $fileSize,
-                'additionalPath' => $additionalPath,
-            ]);
+            'SID' => $SID,
+            'userID' => $userID,
+            'fileType' => $fileType,
+            'fileName' => $fileName,
+            'fileExtension' => $fileExtension,
+            'fileSize' => $fileSize,
+            'additionalPath' => $additionalPath,
+        ]);
 
         return $storage;
     }
@@ -107,6 +140,54 @@ class Storage extends Model
         }
     }
 
+    /**
+     * Delete the file and record of received SID
+     * @param $SID
+     * @return void
+     */
+    public static function deleteBySID($SID)
+    {
+        $storage = self::findBySID($SID);
+
+        if ($storage) {
+            $filePath = config('laran.storage.path') . lcfirst(class_basename($storage->storable_type)) . '/'
+                . $storage->additionalPath . $storage->SID;
+
+            BaseStorage::disk('public')->delete($filePath);
+
+            $storage->delete();
+        }
+    }
+
+    /**
+     * Cache and returns the storage record of received SID
+     * @param $SID
+     * @return mixed
+     */
+    public static function findBySID($SID)
+    {
+        $cacheKey = self::cacheKey('_' . $SID);
+
+        $storage = Cache::tags(self::cacheTag())->remember($cacheKey, now()->addMinutes(10), function () use ($SID) {
+            return self::query()
+                ->where('SID', $SID)
+                ->first();
+        });
+
+        return $storage;
+    }
+
+    public static function cacheKey($key = ''): string
+    {
+        return 'storage' . $key;
+    }
+
+    /**
+     * Fill remained fields and move the file to it's directory
+     * @param $model
+     * @param $isPublic
+     * @return void
+     */
     public function useFor($model, $isPublic = true)
     {
         $storable_type = null;
@@ -123,9 +204,8 @@ class Storage extends Model
                 $storable_type = $class;
             }
         }
-
-
-        $storePath = config('laran.storage.path') . lcfirst(class_basename($model)) . '/' . $this->additionalPath ;
+        
+        $storePath = config('laran.storage.path') . lcfirst(class_basename($model)) . '/' . $this->additionalPath;
         if (!is_dir(base_path() . $storePath)) {
             mkdir(base_path() . $storePath, 0755, true);
         }

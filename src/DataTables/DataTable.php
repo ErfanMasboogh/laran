@@ -72,4 +72,32 @@ abstract class DataTable extends BaseDataTable
      * @return array
      */
     abstract public function getColumns(): array;
+
+    public function showImage(string $imageSID = null): string
+    {
+        $imagePath = asset('vendor/laran/images/default.png');
+
+        if ($imageSID) {
+            $imagePath = route('storage.download', $imageSID);
+        }
+
+        return '<div><img src="' . $imagePath . '" style="width: 75px; height: 75px; border-radius: 10px" ></img></div>';
+    }
+
+    public function editAction(string $route): string
+    {
+        return '<div><a href="' . $route . '" class="btn btn-sm btn-outline-success"><i class="fa fa-lg fa-edit"></i></a></div>';
+    }
+
+    public function deleteAction(string $route): string
+    {
+        return '
+    <div>
+        <a href="' . $route . '"
+       class="btn btn-sm btn-outline-danger"
+       onclick="return confirm(\'' . lt('Deletion ensure') .'\')">
+        <i class="fa fa-lg fa-trash"></i>
+        </a>
+    </div>';
+    }
 }

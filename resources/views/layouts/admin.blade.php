@@ -36,6 +36,15 @@
     </style>
 </head>
 
+@php
+    $imagePath = asset('vendor/laran/images/userIcon.png');
+
+    $imageSID = auth()->guard('manager')->user()->imageSID;
+    if ($imageSID) {
+        $imagePath = route('storage.download', $imageSID);
+    }
+@endphp
+
 <body style="font-family: Vazir;">
 
 <div class="page-content d-flex h-100 flex-row-reverse">
@@ -66,7 +75,7 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item dropdown">
                         <a id="user-dropdown-toggle" class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="{{ asset('vendor/laran/images/userIcon.png') }}" class="rounded-circle me-2 mx-1" width="32" height="32">
+                            <img src="{{ $imagePath }}" class="rounded-circle me-2 mx-1" width="32" height="32">
                             <span class="m-1" >{{ auth()->guard('manager')->user()?->fullName }}</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
@@ -98,14 +107,14 @@
                         <div class="container-fluid">
                             <div class="row mb-2">
                                 <div class="col-sm-12">
-                                    <h4 class="m-0">
+                                    <h4 class="mb-3" style="margin-top: -12px">
                                         @yield('pageTitle')
                                     </h4>
                                 </div><!-- /.col -->
                             </div><!-- /.row -->
                         </div><!-- /.container-fluid -->
                         @if ($errors->any())
-                            <div class="alert alert-danger alert-dismissible">
+                            <div class="alert alert-danger alert-dismissible mb-3">
                                 <ul>
                                     @foreach ($errors->all() as $error)
                                         <li>
@@ -136,7 +145,7 @@
     <div class="sidebar text-white bg-dark overflow-auto">
         <div class="sidebar-content p-3">
             <div class="d-flex flex-column align-items-center text-center mb-2 mt-2">
-                <img src="{{ url('vendor/laran/images/userIcon.png') }}" class="rounded-circle mb-3" width="60" height="60">
+                <img src="{{ $imagePath }}" class="rounded-circle mb-3" width="60" height="60">
                 <div class="mb-1">
                     <div class="fw-semibold text-white">
                         {{ auth()->guard('manager')->user()?->fullName }}

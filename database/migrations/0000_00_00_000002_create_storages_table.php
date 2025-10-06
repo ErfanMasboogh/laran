@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('fileName', 128);
             $table->string('fileExtension', 32);
             $table->unsignedBigInteger('fileSize');
-            $table->string('additionalPath', 128);
+            $table->string('additionalPath', 128)->nullable();
             $table->boolean('isUsed')->default(false);
             $table->boolean('isPublic')->default(false);
             $table->bigInteger('created');
