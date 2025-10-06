@@ -31,4 +31,5 @@ return [
     'Current password' => 'Current password',
     'New password' => 'New password',
     'Show file' => 'Show file',
+    'Wrong current password' => 'Current password is wrong.',
 ];

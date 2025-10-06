@@ -3,7 +3,7 @@
 @section('pageTitle', lt('Edit manager'))
 
 @section('content')
-{{--    {{ html()->form('POST', route('admin.manager.update'))->acceptsFiles()->open() }}--}}
+    {{ html()->form('POST', route('admin.manager.update', $manager->ID))->acceptsFiles()->open() }}
     <div class="card">
         <div class="card-body">
             <div class="form-group">
@@ -61,5 +61,5 @@
             </div>
         </div>
     </div>
-{{--    {{ html()->form()->close() }}--}}
+    {{ html()->form()->close() }}
 @endsection

@@ -24,6 +24,7 @@ Route::prefix('admin')->middleware('web')->group(function () {
             Route::get('/create', [ManagerController::class, 'create'])->name('admin.manager.create');
             Route::post('/store', [ManagerController::class, 'store'])->name('admin.manager.store');
             Route::get('/edit/{manager}', [ManagerController::class, 'edit'])->name('admin.manager.edit');
+            Route::post('/update/{manager}', [ManagerController::class, 'update'])->name('admin.manager.update');
         });
 
     });

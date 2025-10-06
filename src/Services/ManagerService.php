@@ -10,7 +10,7 @@ class ManagerService
 {
     /**
      * @param array $data
-     * @return Manager|\Illuminate\Database\Eloquent\Model
+     * @return Manager
      */
     public function createManager(array $data)
     {
@@ -27,6 +27,36 @@ class ManagerService
                 'mobile' => $data['mobile'],
                 'password' => Hash::make($data['password']),
                 'imageSID' => $hasImage ? $storage->SID : null,
+            ]);
+
+        if ($hasImage) {
+            $storage->useFor($manager);
+        }
+
+        return $manager;
+    }
+
+    /**
+     * @param Manager $manager
+     * @param array $data
+     * @return Manager
+     */
+    public function updateManager(Manager $manager, array $data)
+    {
+        $hasImage = isset($data['image']);
+
+        if ($hasImage) {
+            Storage::deleteBySID($manager->imageSID);
+            
+            $storage = Storage::upload($data['image']);
+        }
+
+        $manager->update([
+                'name' => $data['name'],
+                'family' => $data['family'],
+                'mobile' => $data['mobile'],
+                'password' => isset($data['password']) ? Hash::make($data['password']) : $manager->password,
+                'imageSID' => $hasImage ? $storage->SID : $manager->imageSID,
             ]);
 
         if ($hasImage) {

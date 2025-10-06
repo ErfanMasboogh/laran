@@ -4,6 +4,7 @@ namespace ErfanMasboogh\Laran\Http\Controllers\Web;
 
 use ErfanMasboogh\Laran\DataTables\ManagerDatatable;
 use ErfanMasboogh\Laran\Http\Requests\Web\Manager\StoreRequest;
+use ErfanMasboogh\Laran\Http\Requests\Web\Manager\UpdateRequest;
 use ErfanMasboogh\Laran\Models\Manager;
 use ErfanMasboogh\Laran\Models\Storage;
 use ErfanMasboogh\Laran\Services\ManagerService;
@@ -12,6 +13,13 @@ use Illuminate\Support\Facades\Hash;
 
 class ManagerController extends Controller
 {
+    protected $managerService;
+
+    public function __construct(ManagerService $managerService)
+    {
+        $this->managerService = $managerService;
+    }
+
     /**
      * @return View
      */
@@ -25,11 +33,11 @@ class ManagerController extends Controller
      * @param ManagerService $managerService
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(StoreRequest $request, ManagerService $managerService)
+    public function store(StoreRequest $request)
     {
         $data = $request->validated();
 
-        $managerService->createManager($data);
+        $this->managerService->createManager($data);
 
         return back()->with('success', lt('Operation done successfully'));
     }
@@ -50,5 +58,28 @@ class ManagerController extends Controller
     public function edit(Manager $manager)
     {
         return view('laran::admin.manager.edit', compact('manager'));
+    }
+
+    /**
+     * @param UpdateRequest $request
+     * @param Manager $manager
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(UpdateRequest $request, Manager $manager)
+    {
+        $data = $request->validated();
+        $shouldUpdatePassword = isset($data['password']);
+
+        if ($shouldUpdatePassword) {
+            $isCurrentPasswordCorrect = $request->verifyCurrentPassword($data);
+
+            if (!$isCurrentPasswordCorrect) {
+                return back()->withErrors(lt('Wrong current password'));
+            }
+        }
+
+        $this->managerService->updateManager($manager, $data);
+
+        return redirect()->route('admin.manager.list')->with('success', lt('Operation done successfully'));
     }
 }
