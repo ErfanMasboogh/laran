@@ -19,7 +19,7 @@ Open your Laravel project's `composer.json` file and add the following `reposito
 Next, add the package to the `require` section of your `composer.json` file. This tells Composer to install your package from the source you just defined.
 ```json
 "require": {
-    "erfan-masboogh/laran": "dev-main"
+    "erfanmasboogh/laran": "dev-main"
 }
 ```
 <b>Note:</b> We recommend using a specific branch like `dev-main` for development. Once the package is stable, you can create a tagged release (e.g., `1.0.0`) and change the version constraint.
