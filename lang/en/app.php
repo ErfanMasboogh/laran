@@ -33,5 +33,6 @@ return [
     'Show file' => 'Show file',
     'Wrong current password' => 'Current password is wrong.',
     'Delete' => 'Delete',
-    'Deletion ensure' => 'Are you sure to delete this item?'
+    'Deletion ensure' => 'Are you sure to delete this item?',
+    'Password confirmation' => 'Password confirmation',
 ];
