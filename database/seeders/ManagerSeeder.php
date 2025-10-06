@@ -20,6 +20,6 @@ class ManagerSeeder extends Seeder
             'password' => Hash::make('1234'),
         ];
 
-        Manager::createOrUpdate($managerInfo);
+        Manager::updateOrCreate($managerInfo);
     }
 }
