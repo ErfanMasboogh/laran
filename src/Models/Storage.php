@@ -204,10 +204,11 @@ class Storage extends Model
                 $storable_type = $class;
             }
         }
-        
+
         $storePath = config('laran.storage.path') . lcfirst(class_basename($model)) . '/' . $this->additionalPath;
-        if (!is_dir(base_path() . $storePath)) {
-            mkdir(base_path() . $storePath, 0755, true);
+
+        if (!is_dir(storage_path() . '/app/public/' . $storePath)) {
+            mkdir(storage_path() . '/app/public/' . $storePath, 0755, true);
         }
 
         BaseStorage::disk('public')->move(config('laran.storage.tempPath') . $this->SID, $storePath . $this->SID);
