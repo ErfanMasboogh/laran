@@ -42,6 +42,9 @@ class LaranServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../../database/seeders' => database_path('seeders'),
         ]);
+        $this->publishes([
+            __DIR__ . '/../../config' => config_path(),
+        ]);
 
         // Auth
         $laranAuth = config('laran.auth');
