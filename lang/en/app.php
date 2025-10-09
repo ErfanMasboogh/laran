@@ -3,7 +3,7 @@
 return [
     'menu' => [
         'Dashboard' => 'Dashboard',
-        'Managers list' => 'Managers list',
+        'Managers' => 'Managers',
     ],
     'Login' => 'Login',
     'Login to admin panel' => 'Login to admin panel',
@@ -35,4 +35,5 @@ return [
     'Delete' => 'Delete',
     'Deletion ensure' => 'Are you sure to delete this item?',
     'Password confirmation' => 'Password confirmation',
+    'Managers list' => 'Managers list',
 ];

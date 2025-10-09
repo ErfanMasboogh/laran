@@ -3,7 +3,7 @@
 return [
     'menu' => [
         'Dashboard' => 'داشبورد',
-        'Managers list' => 'لیست مدیرها',
+        'Managers' => 'مدیران',
     ],
     'Login' => 'ورود',
     'Login to admin panel' => 'ورود به ادمین پنل',
@@ -35,4 +35,5 @@ return [
     'Wrong current password' => 'رمز عبور فعلی اشتباه است.',
     'Delete' => 'حذف',
     'Deletion ensure' => 'آیا از حذف این مورد مطمئن هستید؟',
+    'Managers list' => 'لیست مدیران',
 ];

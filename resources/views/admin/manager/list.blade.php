@@ -1,6 +1,6 @@
 @extends('laran::layouts.datatable')
 
-@section('pageTitle', lt('menu.Managers list'))
+@section('pageTitle', lt('Managers list'))
 
 @section('button')
     <div>

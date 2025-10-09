@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'Managers list' => [
+    'Managers' => [
         'icon' => 'fa fa-code',
         'routeName' => 'admin.manager.list',
         'active' => [
