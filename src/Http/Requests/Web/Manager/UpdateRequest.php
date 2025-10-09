@@ -32,12 +32,4 @@ class UpdateRequest extends WebRequest
             'mobile' => normalizeMobile($this->mobile),
         ]);
     }
-
-    public function verifyCurrentPassword(array $data)
-    {
-        if (!Hash::check($data['currentPassword'], $this->manager->password)) {
-            return false;
-        }
-        return true;
-    }
 }

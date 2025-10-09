@@ -5,6 +5,7 @@ namespace ErfanMasboogh\Laran\Services;
 use ErfanMasboogh\Laran\Models\Manager;
 use ErfanMasboogh\Laran\Models\Storage;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 class ManagerService
 {
@@ -43,6 +44,16 @@ class ManagerService
      */
     public function updateManager(Manager $manager, array $data)
     {
+        $shouldUpdatePassword = isset($data['password']);
+
+        if ($shouldUpdatePassword) {
+            if (!Hash::check($data['currentPassword'], $manager->password)) {
+                throw ValidationException::withMessages([
+                    'currentPassword' => lt('Wrong current password'),
+                ]);
+            }
+        }
+
         $hasImage = isset($data['image']);
 
         if ($hasImage) {

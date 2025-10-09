@@ -68,15 +68,6 @@ class ManagerController extends Controller
     public function update(UpdateRequest $request, Manager $manager)
     {
         $data = $request->validated();
-        $shouldUpdatePassword = isset($data['password']);
-
-        if ($shouldUpdatePassword) {
-            $isCurrentPasswordCorrect = $request->verifyCurrentPassword($data);
-
-            if (!$isCurrentPasswordCorrect) {
-                return back()->withErrors(lt('Wrong current password'));
-            }
-        }
 
         $this->managerService->updateManager($manager, $data);
 
