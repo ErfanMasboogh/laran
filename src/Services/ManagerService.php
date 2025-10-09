@@ -4,11 +4,19 @@ namespace ErfanMasboogh\Laran\Services;
 
 use ErfanMasboogh\Laran\Models\Manager;
 use ErfanMasboogh\Laran\Models\Storage;
+use ErfanMasboogh\Laran\Repositories\Manager\ManagerRepository;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
 class ManagerService
 {
+    protected $managerRepo;
+
+    public function __construct(ManagerRepository $managerRepo)
+    {
+        $this->managerRepo = $managerRepo;
+    }
+
     /**
      * @param array $data
      * @return Manager
@@ -21,14 +29,7 @@ class ManagerService
             $storage = Storage::upload($data['image']);
         }
 
-        $manager = Manager::query()
-            ->create([
-                'name' => $data['name'],
-                'family' => $data['family'],
-                'mobile' => $data['mobile'],
-                'password' => Hash::make($data['password']),
-                'imageSID' => $hasImage ? $storage->SID : null,
-            ]);
+        $manager = $this->managerRepo->create($data, $hasImage ? $storage->SID : null);
 
         if ($hasImage) {
             $storage->useFor($manager);
@@ -62,13 +63,9 @@ class ManagerService
             $storage = Storage::upload($data['image']);
         }
 
-        $manager->update([
-                'name' => $data['name'],
-                'family' => $data['family'],
-                'mobile' => $data['mobile'],
-                'password' => isset($data['password']) ? Hash::make($data['password']) : $manager->password,
-                'imageSID' => $hasImage ? $storage->SID : $manager->imageSID,
-            ]);
+        $data['password'] = isset($data['password']) ? Hash::make($data['password']) : $manager->password;
+
+        $this->managerRepo->update($manager, $data, $hasImage ? $storage->SID : $manager->imageSID);
 
         if ($hasImage) {
             $storage->useFor($manager);
@@ -89,6 +86,6 @@ class ManagerService
             Storage::deleteBySID($manager->imageSID);
         }
 
-        $manager->delete();
+        $this->managerRepo->delete($manager);
     }
 }
