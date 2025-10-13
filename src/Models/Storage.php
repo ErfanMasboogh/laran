@@ -220,4 +220,9 @@ class Storage extends Model
             'isUsed' => true,
         ]);
     }
+
+    public function storable()
+    {
+        return $this->morphTo();
+    }
 }
