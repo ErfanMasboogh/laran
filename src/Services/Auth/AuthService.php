@@ -60,7 +60,7 @@ class AuthService
         $cachedData['password'] = Hash::make($data['password']);
 
         Cache::put($data['mobile'], $cachedData, $cacheTime);
-
+        
         $smsService = new SmsService();
         return $smsService->sendOtp(
             $data['mobile'],

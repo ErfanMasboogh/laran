@@ -8,7 +8,7 @@ class SmsService implements SmsServiceInterface
 
     public function __construct()
     {
-        $smsProviderName = config('app.smsService');
+        $smsProviderName = config('laran.smsProvider.smsProviderName');
         $this->smsProvider = SmsServiceFactory::make($smsProviderName);
     }
 

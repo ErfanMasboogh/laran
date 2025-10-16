@@ -1,6 +1,6 @@
 <?php
 
-namespace ErfanMasboogh\Laran\Http\Requests\Api;
+namespace ErfanMasboogh\Laran\Http\Requests\Api\Auth;
 
 use ErfanMasboogh\Laran\Http\Requests\Api\ApiRequest;
 use Illuminate\Validation\Rule;
