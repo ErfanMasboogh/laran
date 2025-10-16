@@ -28,5 +28,9 @@ return [
                 ]
             ]
         ]
+    ],
+    'smsProvider' => [
+        'smsProviderName' => env('SMS_PROVIDER_NAME', 'msgway'),
+        'apiKey' => env('SMS_PROVIDER_API_KEY'),
     ]
 ];
