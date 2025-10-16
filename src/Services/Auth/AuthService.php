@@ -22,9 +22,9 @@ class AuthService
     public function register(array $data)
     {
         $cachedData = Cache::get($data['mobile']) ?? [];
-        $otpConfig = config('app.otp');
+        $otpConfig = config('laran.otp');
         $now = time();
-        $cacheTime = now()->addMinutes(config('app.otp.userInfoCacheTime'));
+        $cacheTime = now()->addMinutes(config('laran.otp.userInfoCacheTime'));
 
         if ($cachedData && $cachedData['tryLimit'] >= $otpConfig['tryLimit']) {
             if (!isset($cachedData['limitReachedTime'])) {
@@ -65,7 +65,7 @@ class AuthService
         return $smsService->sendOtp(
             $data['mobile'],
             $cachedData['otpCode'],
-            config('app.otp.' . config('app.smsService') . '.templateID')
+            config('laran.otp.' . config('laran.smsProvider.smsProviderName') . '.templateID')
         );
     }
 }
