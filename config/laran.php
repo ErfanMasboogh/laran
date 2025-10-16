@@ -42,4 +42,5 @@ return [
         'msgway' => [
             'templateID' => env('MSGWAY_OTP_TEMPLATE_ID'),
         ],
+    ],
 ];
