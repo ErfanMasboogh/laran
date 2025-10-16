@@ -2,8 +2,8 @@
 
 namespace ErfanMasboogh\Laran\Services\Auth;
 
-use App\Services\Sms\SmsService;
 use ErfanMasboogh\Laran\Http\Controllers\Api\Traits\HasApiResponse;
+use ErfanMasboogh\Laran\Services\Sms\SmsService;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
