@@ -1,0 +1,29 @@
+<?php
+
+namespace ErfanMasboogh\Laran\Http\Requests\Api;
+
+use ErfanMasboogh\Laran\Http\Requests\Api\ApiRequest;
+use Illuminate\Validation\Rule;
+
+class RegisterRequest extends ApiRequest
+{
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     */
+    public function rules(): array
+    {
+        return [
+            'mobile' => ['required', 'string', 'validMobile', Rule::unique('users', 'mobile')],
+            'password' => ['required', 'string', 'min:8', 'max:32', 'confirmed'],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'mobile.unique' => lt('mobile.unique', [], 'validation.customMessages.auth'),
+        ];
+    }
+}
