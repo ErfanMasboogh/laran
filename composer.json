@@ -25,7 +25,8 @@
         "laravel/sanctum": "*",
         "spatie/laravel-html": "*",
         "morilog/jalali": "^3.4",
-        "yajra/laravel-datatables": "^12.0"
+        "yajra/laravel-datatables": "^12.0",
+        "ext-curl": "*"
     },
     "extra": {
         "laravel": {
