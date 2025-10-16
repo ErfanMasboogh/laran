@@ -32,5 +32,14 @@ return [
     'smsProvider' => [
         'smsProviderName' => env('SMS_PROVIDER_NAME', 'msgway'),
         'apiKey' => env('SMS_PROVIDER_API_KEY'),
-    ]
+    ],
+    'otp' => [
+        'userInfoCacheTime' => 30, // In minutes
+        'tryLimit' => 5,
+        'expireTime' => 120, // In seconds
+        'restrictTime' => 300, // ~~
+        'resendCoolDown' => 60, // ~~
+        'msgway' => [
+            'templateID' => env('MSGWAY_OTP_TEMPLATE_ID'),
+        ],
 ];
