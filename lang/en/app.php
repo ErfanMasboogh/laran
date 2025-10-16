@@ -36,4 +36,7 @@ return [
     'Deletion ensure' => 'Are you sure to delete this item?',
     'Password confirmation' => 'Password confirmation',
     'Managers list' => 'Managers list',
+    'Register try limit error' => 'You Have reached the limit. please try again in :minutes minutes.',
+    'Register cool down error' => 'You have received the otp recently. Please try again in :seconds seconds.',
+    'Send otp failed' => 'Send otp failed. Please try again later.',
 ];
