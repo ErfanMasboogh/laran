@@ -16,7 +16,7 @@ class SmsService implements SmsServiceInterface
      * Call the sms provider's send method
      *
      * @param string $mobile
-     * @param string $message
+     * @param string $otpCode
      * @param int|null $template
      * @return mixed
      */
