@@ -20,6 +20,13 @@ class RegisterRequest extends ApiRequest
         ];
     }
 
+    public function prepareForValidation()
+    {
+        $this->merge([
+            'mobile' => normalizeMobile($this->mobile)
+        ]);
+    }
+
     public function messages(): array
     {
         return [
