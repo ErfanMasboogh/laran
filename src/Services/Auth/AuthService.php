@@ -60,12 +60,37 @@ class AuthService
         $cachedData['password'] = Hash::make($data['password']);
 
         Cache::put($data['mobile'], $cachedData, $cacheTime);
-        
+
         $smsService = new SmsService();
         return $smsService->sendOtp(
             $data['mobile'],
             $cachedData['otpCode'],
             config('laran.otp.' . config('laran.smsProvider.smsProviderName') . '.templateID')
         );
+    }
+
+    /**
+     * @param array $data
+     * @return array
+     */
+    public function verify(array $data)
+    {
+        $cachedData = Cache::get($data['mobile']);
+        $otpConfig = config('app.otp');
+        $now = time();
+
+        if (empty($cachedData) || ($cachedData['lasSentTime'] + $otpConfig['expireTime']) < $now) {
+            throw new HttpResponseException($this->error(lt('Otp expired error'), ResponseAlias::HTTP_GONE));
+        }
+
+        if ((int)$data['otpCode'] !== (int)$cachedData['otpCode']) {
+            throw new HttpResponseException($this->error(lt('Wrong otp code'), ResponseAlias::HTTP_BAD_REQUEST));
+        }
+
+        $data['password'] = $cachedData['password'];
+
+        Cache::forget($data['mobile']);
+
+        return $data;
     }
 }
