@@ -79,7 +79,7 @@ class AuthService
         $otpConfig = config('app.otp');
         $now = time();
 
-        if (empty($cachedData) || ($cachedData['lasSentTime'] + $otpConfig['expireTime']) < $now) {
+        if (empty($cachedData) || ($cachedData['lastSentTime'] + $otpConfig['expireTime']) < $now) {
             throw new HttpResponseException($this->error(lt('Otp expired error'), ResponseAlias::HTTP_GONE));
         }
 
