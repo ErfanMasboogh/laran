@@ -3,10 +3,12 @@
 namespace ErfanMasboogh\Laran\Models;
 
 use ErfanMasboogh\Laran\Models\Traits\HasStorage;
+use Laravel\Sanctum\HasApiTokens;
 
-class User extends Model 
+class User extends Model
 {
     use HasStorage;
+    use HasApiTokens;
 
     protected $fillable = [
         'name',

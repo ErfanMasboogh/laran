@@ -77,7 +77,7 @@ class AuthService
     public function verify(array $data)
     {
         $cachedData = Cache::get($data['mobile']);
-        $otpConfig = config('app.otp');
+        $otpConfig = config('laran.otp');
         $now = time();
 
         if (empty($cachedData) || ($cachedData['lastSentTime'] + $otpConfig['expireTime']) < $now) {

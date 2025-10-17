@@ -9,6 +9,7 @@ Route::middleware('api')->prefix('api')->group(function () {
         // Auth
         Route::group(['prefix' => 'auth'], function () {
             Route::post('/register', [AuthController::class, 'register'])->name('v1.auth.register');
+            Route::post('/verify', [AuthController::class, 'verify'])->name('v1.auth.verify');
         });
 
     });
