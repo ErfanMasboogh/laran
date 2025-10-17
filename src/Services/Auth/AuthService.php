@@ -3,6 +3,7 @@
 namespace ErfanMasboogh\Laran\Services\Auth;
 
 use ErfanMasboogh\Laran\Http\Controllers\Api\Traits\HasApiResponse;
+use ErfanMasboogh\Laran\Models\User;
 use ErfanMasboogh\Laran\Services\Sms\SmsService;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\Cache;
@@ -92,5 +93,14 @@ class AuthService
         Cache::forget($data['mobile']);
 
         return $data;
+    }
+
+    /**
+     * @param User $user
+     * @return string
+     */
+    public function createAuthToken(User $user)
+    {
+        return $user->createToken('auth_token')->plainTextToken;
     }
 }
