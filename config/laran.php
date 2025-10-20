@@ -14,6 +14,10 @@ return [
                 'model' => \ErfanMasboogh\Laran\Models\Manager::class,
             ],
         ],
+        'rateLimiter' => [
+            'maxAttempts' => 5,
+            'decaySeconds' => 60,
+        ],
     ],
     'storage' => [
         'path' => 'uploads/',

@@ -8,6 +8,7 @@ use ErfanMasboogh\Laran\Services\Sms\SmsService;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\RateLimiter;
 use Random\RandomException;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
@@ -102,5 +103,54 @@ class AuthService
     public function createAuthToken(User $user)
     {
         return $user->createToken('auth_token')->plainTextToken;
+    }
+
+    /**
+     * @param User $user
+     * @param array $data
+     * @return string
+     */
+    public function login(User $user, array $data)
+    {
+        $throttleKey = $this->makeThrottleKey($data);
+
+        if (RateLimiter::tooManyAttempts($throttleKey, config('laran.auth.rateLimiter.maxAttempts'))) {
+            $seconds = RateLimiter::availableIn($throttleKey);
+
+            throw new HttpResponseException(
+                $this->error(lt('Rate limit error', ['seconds' => $seconds]), ResponseAlias::HTTP_TOO_MANY_REQUESTS)
+            );
+        }
+
+        $this->checkPassword($user, $data['password'], $throttleKey);
+
+        RateLimiter::clear($throttleKey);
+
+        return $this->createAuthToken($user);
+    }
+
+    /**
+     * @param array $data
+     * @return string
+     */
+    private function makeThrottleKey(array $data)
+    {
+        return strtolower($data['mobile'] . '|' . $data['ip']);
+    }
+
+    /**
+     * @param User $user
+     * @param string $password
+     * @return void
+     */
+    private function checkPassword(User $user, string $password, string $throttleKey)
+    {
+        if (!Hash::check($password, $user->password)) {
+            RateLimiter::hit($throttleKey, config('laran.auth.rateLimiter.decaySeconds'));
+
+            throw new HttpResponseException(
+                $this->error(lt('Wrong password error'), ResponseAlias::HTTP_UNPROCESSABLE_ENTITY)
+            );
+        }
     }
 }

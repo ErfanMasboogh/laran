@@ -41,4 +41,5 @@ return [
     'Send otp failed' => 'Send otp failed. Please try again later.',
     'Otp expired error' => 'Verification code expired. please request a new one.',
     'Wrong otp code' => 'Verification code is wrong!',
+    'Wrong password error' => 'The password is wrong!',
 ];
