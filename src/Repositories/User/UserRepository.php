@@ -15,4 +15,11 @@ class UserRepository implements UserRepositoryInterface
                 'password' => $isPasswordHashed ? $data['password'] : Hash::make($data['password']),
             ]);
     }
+
+    public function findByMobile(string $mobile)
+    {
+        return User::query()
+            ->where('mobile', $mobile)
+            ->first();
+    }
 }
