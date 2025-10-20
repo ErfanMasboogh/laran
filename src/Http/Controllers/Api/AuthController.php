@@ -4,6 +4,8 @@ namespace ErfanMasboogh\Laran\Http\Controllers\Api;
 
 use ErfanMasboogh\Laran\Http\Requests\Api\Auth\RegisterRequest;
 use ErfanMasboogh\Laran\Http\Requests\Api\Auth\VerifyRequest;
+use ErfanMasboogh\Laran\Http\Requests\Web\Auth\LoginRequest;
+use ErfanMasboogh\Laran\Repositories\User\UserRepository;
 use ErfanMasboogh\Laran\Services\Auth\AuthService;
 use ErfanMasboogh\Laran\Services\User\UserService;
 use Illuminate\Http\JsonResponse;
@@ -14,11 +16,13 @@ class AuthController extends Controller
 {
     protected $authService;
     protected $userService;
+    protected $userRepo;
 
-    public function __construct(AuthService $authService, UserService $userService)
+    public function __construct(AuthService $authService, UserService $userService, UserRepository $userRepo)
     {
         $this->authService = $authService;
         $this->userService = $userService;
+        $this->userRepo = $userRepo;
     }
 
     /**
@@ -52,6 +56,24 @@ class AuthController extends Controller
         $data = $this->authService->verify($data);
         $user = $this->userService->createUser($data, true);
         $token = $this->authService->createAuthToken($user);
+
+        return $this->success([
+            'token' => $token,
+            'tokenType' => 'Bearer',
+        ]);
+    }
+
+    /**
+     * @param LoginRequest $request
+     * @return JsonResponse
+     */
+    public function login(LoginRequest $request)
+    {
+        $data = $request->validated();
+        $data['ip'] = $request->ip();
+
+        $user = $this->userRepo->findByMobile($data['mobile']);
+        $token = $this->authService->login($user, $data);
 
         return $this->success([
             'token' => $token,
