@@ -153,4 +153,13 @@ class AuthService
             );
         }
     }
+
+    /**
+     * @param User $user
+     * @return mixed
+     */
+    public function logout(User $user)
+    {
+        return $user->currentAccessToken()->delete();
+    }
 }
