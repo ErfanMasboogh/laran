@@ -80,4 +80,16 @@ class AuthController extends Controller
             'tokenType' => 'Bearer',
         ]);
     }
+
+    /**
+     * @return JsonResponse
+     */
+    public function logout()
+    {
+        $user = auth()->user();
+
+        $this->authService->logout($user);
+
+        return $this->success();
+    }
 }

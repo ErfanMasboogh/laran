@@ -11,6 +11,9 @@ Route::middleware('api')->prefix('api')->group(function () {
             Route::post('/register', [AuthController::class, 'register'])->name('v1.auth.register');
             Route::post('/verify', [AuthController::class, 'verify'])->name('v1.auth.verify');
             Route::post('/login', [AuthController::class, 'login'])->name('v1.auth.login');
+            Route::middleware('auth:sanctum')->group(function () {
+                Route::post('/logout', [AuthController::class, 'logout'])->name('v1.auth.logout');
+            });
         });
 
     });
