@@ -155,4 +155,11 @@ return [
     'uuid' => 'The :attribute field must be a valid UUID.',
     'mobile' => 'The :attribute field must be a valid mobile number.',
     'attributes' => [],
+    'customMessages' => [
+        'auth' => [
+            'mobile' => [
+                'unique' => 'An account with this mobile number already exists.',
+            ],
+        ]
+    ]
 ];
